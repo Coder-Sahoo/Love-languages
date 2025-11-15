@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You in 7000 Languages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><span class="heart-animation">❤️</span> I Love You <span class="heart-animation">❤️</span></h1>
+            <p class="tagline">Discover how to say "I Love You" in thousands of languages from around the world</p>
+            
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search for a language or region...">
+            </div>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All Languages</button>
+                <button class="filter-btn" data-filter="europe">European</button>
+                <button class="filter-btn" data-filter="asia">Asian</button>
+                <button class="filter-btn" data-filter="africa">African</button>
+                <button class="filter-btn" data-filter="americas">Americas</button>
+                <button class="filter-btn" data-filter="oceania">Oceania</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">7,000+</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">195</div>
+                <div class="stat-label">Countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Continents</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Language Families</div>
+            </div>
+        </div>
+
+        <div class="tts-notice">
+            <i class="fas fa-info-circle"></i> Click the speaker icon next to each phrase to hear the pronunciation using your browser's text-to-speech technology.
+        </div>
+
+        <div class="languages-grid" id="languagesContainer">
+            <!-- Language cards will be dynamically inserted here -->
+        </div>
+
+        <button class="load-more" id="loadMore">Load More Languages</button>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Share the Love Around the World</h3>
+            <div class="footer-links">
+                <a href="#">About This Project</a>
+                <a href="#">Contribute a Translation</a>
+                <a href="#">Language Resources</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p class="copyright">© 2023 I Love You in 7000 Languages. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample language data (in a real project, this would come from an API or database)
+        const languages = [
+            { name: "English", region: "Worldwide", translation: "I love you", pronunciation: "ai luhv yoo", continent: "europe", speakers: "1.5 billion", family: "Germanic", voiceLang: "en-US" },
+            { name: "Spanish", region: "Spain, Latin America", translation: "Te quiero", pronunciation: "teh kyeh-roh", continent: "europe", speakers: "580 million", family: "Romance", voiceLang: "es-ES" },
+            { name: "French", region: "France, Canada, Africa", translation: "Je t'aime", pronunciation: "zhuh tem", continent: "europe", speakers: "280 million", family: "Romance", voiceLang: "fr-FR" },
+            { name: "Mandarin Chinese", region: "China, Taiwan, Singapore", translation: "我爱你", pronunciation: "wǒ ài nǐ", continent: "asia", speakers: "1.1 billion", family: "Sino-Tibetan", voiceLang: "zh-CN" },
+            { name: "Hindi", region: "India", translation: "मैं तुमसे प्यार करता हूँ", pronunciation: "main tumse pyaar karta hoon", continent: "asia", speakers: "600 million", family: "Indo-Aryan", voiceLang: "hi-IN" },
+            { name: "Arabic", region: "Middle East, North Africa", translation: "أحبك", pronunciation: "uhibbuki (to female) / uhibbuka (to male)", continent: "africa", speakers: "310 million", family: "Semitic", voiceLang: "ar-SA" },
+            { name: "Portuguese", region: "Portugal, Brazil, Africa", translation: "Eu te amo", pronunciation: "eh-o teh ah-moo", continent: "europe", speakers: "260 million", family: "Romance", voiceLang: "pt-BR" },
+            { name: "Russian", region: "Russia, Eastern Europe", translation: "Я тебя люблю", pronunciation: "ya tebya lyublyu", continent: "europe", speakers: "258 million", family: "Slavic", voiceLang: "ru-RU" },
+            { name: "Japanese", region: "Japan", translation: "愛してる", pronunciation: "aishiteru", continent: "asia", speakers: "125 million", family: "Japonic", voiceLang: "ja-JP" },
+            { name: "German", region: "Germany, Austria, Switzerland", translation: "Ich liebe dich", pronunciation: "ish lee-be dish", continent: "europe", speakers: "130 million", family: "Germanic", voiceLang: "de-DE" },
+            { name: "Swahili", region: "East Africa", translation: "Nakupenda", pronunciation: "nah-koo-pen-dah", continent: "africa", speakers: "100 million", family: "Niger-Congo", voiceLang: "sw-KE" },
+            { name: "Italian", region: "Italy, Switzerland", translation: "Ti amo", pronunciation: "tee ah-moh", continent: "europe", speakers: "68 million", family: "Romance", voiceLang: "it-IT" },
+            { name: "Korean", region: "Korea", translation: "사랑해", pronunciation: "saranghae", continent: "asia", speakers: "77 million", family: "Koreanic", voiceLang: "ko-KR" },
+            { name: "Turkish", region: "Turkey, Cyprus", translation: "Seni seviyorum", pronunciation: "seh-nee seh-vee-yor-um", continent: "asia", speakers: "88 million", family: "Turkic", voiceLang: "tr-TR" },
+            { name: "Vietnamese", region: "Vietnam", translation: "Anh yêu em", pronunciation: "ahn yew em", continent: "asia", speakers: "85 million", family: "Austroasiatic", voiceLang: "vi-VN" },
+            { name: "Thai", region: "Thailand", translation: "ฉันรักคุณ", pronunciation: "chan rak khun", continent: "asia", speakers: "61 million", family: "Tai-Kadai", voiceLang: "th-TH" },
+            { name: "Greek", region: "Greece, Cyprus", translation: "Σ' αγαπώ", pronunciation: "s' agapó", continent: "europe", speakers: "13 million", family: "Hellenic", voiceLang: "el-GR" },
+            { name: "Hebrew", region: "Israel", translation: "אני אוהב אותך", pronunciation: "ani ohev otakh (to female) / ani ohev otkha (to male)", continent: "asia", speakers: "9 million", family: "Semitic", voiceLang: "he-IL" },
+            { name: "Swedish", region: "Sweden, Finland", translation: "Jag älskar dig", pronunciation: "yahg el-skar day", continent: "europe", speakers: "10 million", family: "Germanic", voiceLang: "sv-SE" },
+            { name: "Dutch", region: "Netherlands, Belgium", translation: "Ik hou van jou", pronunciation: "ik how van yow", continent: "europe", speakers: "28 million", family: "Germanic", voiceLang: "nl-NL" },
+            { name: "Polish", region: "Poland", translation: "Kocham cię", pronunciation: "ko-ham che", continent: "europe", speakers: "45 million", family: "Slavic", voiceLang: "pl-PL" },
+            { name: "Finnish", region: "Finland", translation: "Rakastan sinua", pronunciation: "rah-kah-stan see-noo-ah", continent: "europe", speakers: "5.5 million", family: "Uralic", voiceLang: "fi-FI" },
+            { name: "Norwegian", region: "Norway", translation: "Jeg elsker deg", pronunciation: "yai el-sker dai", continent: "europe", speakers: "5.3 million", family: "Germanic", voiceLang: "nb-NO" },
+            { name: "Danish", region: "Denmark", translation: "Jeg elsker dig", pronunciation: "yai el-sker dai", continent: "europe", speakers: "6 million", family: "Germanic", voiceLang: "da-DK" },
+            { name: "Czech", region: "Czech Republic", translation: "Miluji tě", pronunciation: "mi-loo-yi tye", continent: "europe", speakers: "10.7 million", family: "Slavic", voiceLang: "cs-CZ" },
+            { name: "Romanian", region: "Romania, Moldova", translation: "Te iubesc", pronunciation: "teh yoo-besk", continent: "europe", speakers: "24 million", family: "Romance", voiceLang: "ro-RO" },
+            { name: "Hungarian", region: "Hungary", translation: "Szeretlek", pronunciation: "seh-ret-lek", continent: "europe", speakers: "13 million", family: "Uralic", voiceLang: "hu-HU" },
+            { name: "Bulgarian", region: "Bulgaria", translation: "Обичам те", pronunciation: "o-bee-cham te", continent: "europe", speakers: "8 million", family: "Slavic", voiceLang: "bg-BG" },
+            { name: "Ukrainian", region: "Ukraine", translation: "Я тебе кохаю", pronunciation: "ya te-be ko-ha-yu", continent: "europe", speakers: "41 million", family: "Slavic", voiceLang: "uk-UA" },
+            { name: "Indonesian", region: "Indonesia", translation: "Aku cinta kamu", pronunciation: "ah-koo chin-tah kah-moo", continent: "asia", speakers: "200 million", family: "Austronesian", voiceLang: "id-ID" },
+            { name: "Malay", region: "Malaysia, Indonesia, Brunei", translation: "Saya sayang awak", pronunciation: "sah-yah sah-yahng ah-wahk", continent: "asia", speakers: "290 million", family: "Austronesian", voiceLang: "ms-MY" },
+            { name: "Filipino", region: "Philippines", translation: "Mahal kita", pronunciation: "mah-hal kee-tah", continent: "asia", speakers: "45 million", family: "Austronesian", voiceLang: "fil-PH" },
+            { name: "Persian", region: "Iran, Afghanistan, Tajikistan", translation: "دوستت دارم", pronunciation: "doo-set daa-ram", continent: "asia", speakers: "110 million", family: "Indo-Iranian", voiceLang: "fa-IR" },
+            { name: "Urdu", region: "Pakistan, India", translation: "میں تم سے پیار کرتا ہوں", pronunciation: "main tumse pyaar karta hoon", continent: "asia", speakers: "230 million", family: "Indo-Aryan", voiceLang: "ur-PK" },
+            { name: "Bengali", region: "Bangladesh, India", translation: "আমি তোমায় ভালোবাসি", pronunciation: "aami tom-aay bhalobaashi", continent: "asia", speakers: "230 million", family: "Indo-Aryan", voiceLang: "bn-BD" },
+            { name: "Punjabi", region: "India, Pakistan", translation: "ਮੈਂ ਤੁਹਾਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ", pronunciation: "main tuhanu pyar karda haan", continent: "asia", speakers: "125 million", family: "Indo-Aryan", voiceLang: "pa-IN" },
+            { name: "Marathi", region: "India", translation: "मी तुझ्यावर प्रेम करतो", pronunciation: "mee tujhyaavar prem karato", continent: "asia", speakers: "83 million", family: "Indo-Aryan", voiceLang: "mr-IN" },
+            { name: "Tamil", region: "India, Sri Lanka, Singapore", translation: "நான் உன்னை காதலிக்கிறேன்", pronunciation: "naan unnai kaadhalikiren", continent: "asia", speakers: "75 million", family: "Dravidian", voiceLang: "ta-IN" },
+            { name: "Telugu", region: "India", translation: "నేను నిన్ను ప్రేమిస్తున్నాను", pronunciation: "nenu ninnu premistunnanu", continent: "asia", speakers: "82 million", family: "Dravidian", voiceLang: "te-IN" },
+            { name: "Kannada", region: "India", translation: "ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ", pronunciation: "naanu ninnannu preethisuttene", continent: "asia", speakers: "44 million", family: "Dravidian", voiceLang: "kn-IN" },
+            { name: "Malayalam", region: "India", translation: "ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു", pronunciation: "nyaan ninne snehikkunnu", continent: "asia", speakers: "38 million", family: "Dravidian", voiceLang: "ml-IN" },
+            { name: "Gujarati", region: "India", translation: "હું તને પ્રેમ કરું છું", pronunciation: "hun tane prem karun chhu", continent: "asia", speakers: "55 million", family: "Indo-Aryan", voiceLang: "gu-IN" },
+            { name: "Odia", region: "India", translation: "ମୁଁ ତୁମକୁ ଭଲପାଏ", pronunciation: "mu tumaku bhalapae", continent: "asia", speakers: "35 million", family: "Indo-Aryan", voiceLang: "or-IN" },
+            { name: "Burmese", region: "Myanmar", translation: "မင်းကိုချစ်တယ်", pronunciation: "main koh chit tal", continent: "asia", speakers: "33 million", family: "Sino-Tibetan", voiceLang: "my-MM" },
+            { name: "Amharic", region: "Ethiopia", translation: "እወድሃለሁ", pronunciation: "ewedihalehu", continent: "africa", speakers: "32 million", family: "Semitic", voiceLang: "am-ET" },
+            { name: "Yoruba", region: "Nigeria, Benin", translation: "Mo nifẹ rẹ", pronunciation: "moh nee-feh reh", continent: "africa", speakers: "45 million", family: "Niger-Congo", voiceLang: "yo-NG" },
+            { name: "Igbo", region: "Nigeria", translation: "A hụrụ m gị n'anya", pronunciation: "ah hoo-roo mee gee n'ah-nya", continent: "africa", speakers: "45 million", family: "Niger-Congo", voiceLang: "ig-NG" },
+            { name: "Zulu", region: "South Africa", translation: "Ngiyakuthanda", pronunciation: "ngee-yah-koo-tahn-dah", continent: "africa", speakers: "12 million", family: "Niger-Congo", voiceLang: "zu-ZA" },
+            { name: "Xhosa", region: "South Africa", translation: "Ndiyakuthanda", pronunciation: "n-dee-yah-koo-tahn-dah", continent: "africa", speakers: "8 million", family: "Niger-Congo", voiceLang: "xh-ZA" },
+            { name: "Shona", region: "Zimbabwe", translation: "Ndinokuda", pronunciation: "ndee-noh-koo-dah", continent: "africa", speakers: "11 million", family: "Niger-Congo", voiceLang: "sn-ZW" },
+            { name: "Hausa", region: "Nigeria, Niger", translation: "Ina son ku", pronunciation: "ee-nah sohn koo", continent: "africa", speakers: "63 million", family: "Afro-Asiatic", voiceLang: "ha-NG" },
+            { name: "Somali", region: "Somalia, Ethiopia, Kenya", translation: "Waan ku jeclahay", pronunciation: "waan ku je-cla-hay", continent: "africa", speakers: "22 million", family: "Cushitic", voiceLang: "so-SO" },
+            { name: "Oromo", region: "Ethiopia, Kenya", translation: "Sin jaaladha", pronunciation: "sin ja-la-dha", continent: "africa", speakers: "37 million", family: "Cushitic", voiceLang: "om-ET" },
+            { name: "Malagasy", region: "Madagascar", translation: "Tiako ianao", pronunciation: "tee-ah-koo ee-ah-now", continent: "africa", speakers: "25 million", family: "Austronesian", voiceLang: "mg-MG" },
+            { name: "Quechua", region: "Peru, Bolivia, Ecuador", translation: "Kuyayki", pronunciation: "koo-yai-kee", continent: "americas", speakers: "8 million", family: "Quechuan", voiceLang: "qu-PE" },
+            { name: "Guarani", region: "Paraguay, Bolivia", translation: "Rohayhu", pronunciation: "roh-hai-hoo", continent: "americas", speakers: "6 million", family: "Tupian", voiceLang: "gn-PY" },
+            { name: "Navajo", region: "United States", translation: "Ayóó ánóshní", pronunciation: "ah-yoh ah-nosh-nee", continent: "americas", speakers: "170,000", family: "Na-Dené", voiceLang: "nv-US" },
+            { name: "Inuktitut", region: "Canada", translation: "ᓇᒡᓕᒋᕙᒋᑦ", pronunciation: "nagligivagit", continent: "americas", speakers: "39,000", family: "Eskimo-Aleut", voiceLang: "iu-CA" },
+            { name: "Hawaiian", region: "Hawaii", translation: "Aloha wau iā 'oe", pronunciation: "ah-loh-ha vow ee-ah oh-eh", continent: "oceania", speakers: "24,000", family: "Austronesian", voiceLang: "haw-US" },
+            { name: "Maori", region: "New Zealand", translation: "Kei te aroha au ki a koe", pronunciation: "kay teh ah-roh-ha ow kee ah koh-eh", continent: "oceania", speakers: "150,000", family: "Austronesian", voiceLang: "mi-NZ" },
+            { name: "Samoan", region: "Samoa", translation: "Ou te alofa ia te oe", pronunciation: "oh teh ah-loh-fah ee-ah teh oh-eh", continent: "oceania", speakers: "510,000", family: "Austronesian", voiceLang: "sm-WS" },
+            { name: "Fijian", region: "Fiji", translation: "Au domoni iko", pronunciation: "ow doh-moh-nee ee-koh", continent: "oceania", speakers: "640,000", family: "Austronesian", voiceLang: "fj-FJ" },
+            { name: "Tongan", region: "Tonga", translation: "'Oku ou 'ofa ia koe", pronunciation: "oh-koo oh-oo oh-fah ee-ah koh-eh", continent: "oceania", speakers: "187,000", family: "Austronesian", voiceLang: "to-TO" },
+            { name: "Tahitian", region: "French Polynesia", translation: "Ua here au ia oe", pronunciation: "oo-ah heh-reh ow ee-ah oh-eh", continent: "oceania", speakers: "185,000", family: "Austronesian", voiceLang: "ty-PF" }
+        ];
+
+        // DOM elements
+        const languagesContainer = document.getElementById('languagesContainer');
+        const searchInput = document.getElementById('search');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const loadMoreButton = document.getElementById('loadMore');
+
+        // State variables
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let displayedCount = 12;
+        let currentPlayingButton = null;
+
+        // Initialize the page
+        function init() {
+            renderLanguages();
+            setupEventListeners();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            searchInput.addEventListener('input', handleSearch);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', handleFilter);
+            });
+            
+            loadMoreButton.addEventListener('click', handleLoadMore);
+        }
+
+        // Handle search input
+        function handleSearch(e) {
+            currentSearch = e.target.value.toLowerCase();
+            displayedCount = 12; // Reset to initial count when searching
+            renderLanguages();
+        }
+
+        // Handle filter button clicks
+        function handleFilter(e) {
+            const filter = e.target.dataset.filter;
+            
+            // Update active button
+            filterButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            e.target.classList.add('active');
+            
+            // Update current filter and re-render
+            currentFilter = filter;
+            displayedCount = 12; // Reset to initial count when filtering
+            renderLanguages();
+        }
+
+        // Handle load more button
+        function handleLoadMore() {
+            displayedCount += 12;
+            renderLanguages();
+        }
+
+        // Speak text using Web Speech API
+        function speakText(text, lang, button) {
+            // Stop any currently playing speech
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                
+                // If clicking the same button that's currently playing, just stop
+                if (currentPlayingButton === button) {
+                    currentPlayingButton.classList.remove('playing');
+                    currentPlayingButton = null;
+                    return;
+                }
+                
+                // Reset previous playing button
+                if (currentPlayingButton) {
+                    currentPlayingButton.classList.remove('playing');
+                }
+            }
+            
+            // Set up the speech synthesis
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; // Slightly slower for clarity
+            
+            // Add event listeners for the utterance
+            utterance.onstart = function() {
+                button.classList.add('playing');
+                currentPlayingButton = button;
+            };
+            
+            utterance.onend = function() {
+                button.classList.remove('playing');
+                currentPlayingButton = null;
+            };
+            
+            utterance.onerror = function() {
+                button.classList.remove('playing');
+                currentPlayingButton = null;
+                alert('Sorry, speech synthesis is not supported for this language in your browser.');
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Render languages based on current filters and search
+        function renderLanguages() {
+            // Clear container
+            languagesContainer.innerHTML = '';
+            
+            // Filter languages based on search and filter
+            const filteredLanguages = languages.filter(language => {
+                const matchesSearch = 
+                    language.name.toLowerCase().includes(currentSearch) ||
+                    language.region.toLowerCase().includes(currentSearch) ||
+                    language.translation.toLowerCase().includes(currentSearch);
+                
+                const matchesFilter = currentFilter === 'all' || language.continent === currentFilter;
+                
+                return matchesSearch && matchesFilter;
+            });
+            
+            // Display languages up to the current count
+            const languagesToShow = filteredLanguages.slice(0, displayedCount);
+            
+            if (languagesToShow.length === 0) {
+                languagesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No languages found matching your criteria.</p>';
+                loadMoreButton.style.display = 'none';
+                return;
+            }
+            
+            // Create language cards
+            languagesToShow.forEach(language => {
+                const card = document.createElement('div');
+                card.className = 'language-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="language-name">${language.name}</div>
+                        <div class="language-region">${language.region}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="translation">${language.translation}</div>
+                        <div class="pronunciation">${language.pronunciation}</div>
+                        <div class="voice-controls">
+                            <button class="voice-btn" data-text="${language.translation}" data-lang="${language.voiceLang}">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                            <span>Click to hear pronunciation</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div>${language.family} • ${language.speakers} speakers</div>
+                        <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                `;
+                
+                // Add event listener to the voice button
+                const voiceBtn = card.querySelector('.voice-btn');
+                voiceBtn.addEventListener('click', function() {
+                    speakText(this.dataset.text, this.dataset.lang, this);
+                });
+                
+                languagesContainer.appendChild(card);
+            });
+            
+            // Show/hide load more button
+            if (filteredLanguages.length > displayedCount) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
+            }
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
