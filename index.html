@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="header-content">
-            <h1><span class="heart-animation">❤</span> Essential Phrases <span class="heart-animation">❤</span></h1>
+            <h1><span class="heart-animation">❤️</span> Essential Phrases <span class="heart-animation">❤️</span></h1>
             <p class="tagline">Discover how to say essential phrases in thousands of languages from around the world</p>
             
             <div class="phrase-selector-container">
@@ -457,8 +457,8 @@
                     
                     if (phraseData) {
                         // Update the translation and pronunciation
-                        const translationEl = card.querySelector(#translation-${languageName});
-                        const pronunciationEl = card.querySelector(#pronunciation-${languageName});
+                        const translationEl = card.querySelector(`#translation-${languageName}`);
+                        const pronunciationEl = card.querySelector(`#pronunciation-${languageName}`);
                         const voiceBtn = card.querySelector('.voice-btn');
                         
                         translationEl.textContent = phraseData.translation;
